@@ -4,26 +4,29 @@ import { useState, useEffect } from "react";
 import Usuario from "../components/Home/Usuario";
 import "./styles/home.css";
 import ModalCrear from "../components/Home/ModalCrear";
+import ModalEliminar from "../components/Home/ModalEliminar";
 
 const Home = () => {
   const [usuarios, setUsuarios] = useState();
+  const [editar, setEditar] = useState(false);
+  const [eliminar, setEliminar] = useState(false);
 
-    useEffect(() => {
-      $.ajax({
-        url: "https://telemedicina.jakemate.net:7141/api/webservice/metodo",
-        data: { _nombreMetodo_: "listarPersonas" },
-        method: "POST",
-        headers: {
-          ContentType: "application/x-www-form-urlencoded",
-          Token: "NJKJNTL8SNKH5JJRTS32ZGSIIDPGHLU6KRXLQMLMJJU8MD7EY5TSWMGD2D6Z",
-          ApiKey: "ISSTIXZTV53RZURJKTZD3MXVMEW7X3",
-        },
-        success: (resultados) => {
-          setUsuarios(resultados.resultado.Table);
-          console.log(resultados);
-        },
-      });
-    }, []);
+  useEffect(() => {
+    $.ajax({
+      url: "https://telemedicina.jakemate.net:7141/api/webservice/metodo",
+      data: { _nombreMetodo_: "listarPersonas" },
+      method: "POST",
+      headers: {
+        ContentType: "application/x-www-form-urlencoded",
+        Token: "NJKJNTL8SNKH5JJRTS32ZGSIIDPGHLU6KRXLQMLMJJU8MD7EY5TSWMGD2D6Z",
+        ApiKey: "ISSTIXZTV53RZURJKTZD3MXVMEW7X3",
+      },
+      success: (resultados) => {
+        setUsuarios(resultados.resultado.Table);
+        console.log(resultados);
+      },
+    });
+  }, []);
 
   const handleClickCrear = () => {
     const modal = document.querySelector("#modal");
@@ -32,16 +35,28 @@ const Home = () => {
 
   const handleClickCerrar = () => {
     const modal = document.querySelector("#modal");
-    const cerrar__modal = document.querySelector('#cerrar__modal');
     modal.close();
-  }
+    setEditar(false);
+    setEliminar(false);
+  };
 
   return (
     <div>
-      
       <dialog id="modal">
-        <button onClick={handleClickCerrar} id="cerrar__modal">X</button>
-        <ModalCrear/>
+        <button onClick={handleClickCerrar} id="cerrar__modal">
+          X
+        </button>
+        {
+          editar == true ? (
+            <ModalCrear editar={editar} />
+          ) : eliminar == false ?
+          (
+            <ModalCrear editar={editar} />
+          ) :
+          (
+            <ModalEliminar/>
+          )
+        }
       </dialog>
 
       <div className="home">
@@ -71,7 +86,12 @@ const Home = () => {
           </div>
           <div className="contenedor__datos">
             {usuarios?.map((usuario) => (
-              <Usuario key={usuario.COD_PERSONA} usuario={usuario} />
+              <Usuario
+                key={usuario.COD_PERSONA}
+                usuario={usuario}
+                setEditar={setEditar}
+                setEliminar={setEliminar}
+              />
             ))}
           </div>
         </div>

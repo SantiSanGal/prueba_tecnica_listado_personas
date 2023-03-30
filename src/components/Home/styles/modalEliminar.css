@@ -1,0 +1,15 @@
+.modal__eliminar{
+    height: 150px;
+    display: grid;
+    place-content: center;
+}
+
+.modal__eliminar__btn{
+    padding: 0.5rem;
+    border: none;
+    font-weight: bold;
+    border-radius: 15px;
+    background-color: #EB455F;
+    color: #fff;
+    cursor: pointer;
+}

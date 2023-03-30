@@ -4,6 +4,32 @@
     align-items: center;
 }
 
+#modal{
+    margin: auto;
+    padding: 1.5rem;
+    width: fit-content;
+    max-width: 500px;
+    height: fit-content;
+    max-height: 500px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15);
+    position: relative;
+    background-color: #E1F2FB;
+}
+
+#cerrar__modal{
+    height: 25px;
+    width: 25px;
+    border: none;
+    border-radius: 50%;
+    background-color: #EB455F;
+    position: absolute;
+    right: calc(5%);
+    top: calc(8%);
+    cursor: pointer;
+}
+
 .contenedor__titulo{
     display: flex;
     justify-content: space-between;
@@ -28,6 +54,7 @@
 
     background-color: #03C988;
     color: #fff;
+    cursor: pointer;
 }
 
 .contenedor__listado{

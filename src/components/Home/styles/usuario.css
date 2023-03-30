@@ -29,6 +29,7 @@
     width: 25px;
     border: none;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .edit{
