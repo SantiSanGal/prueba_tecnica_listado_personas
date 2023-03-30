@@ -10,6 +10,9 @@ const Home = () => {
   const [usuarios, setUsuarios] = useState();
   const [editar, setEditar] = useState(false);
   const [eliminar, setEliminar] = useState(false);
+  const [COD_PERSONA, setCOD_PERSONA] = useState();
+
+
 
   useEffect(() => {
     $.ajax({
@@ -48,13 +51,13 @@ const Home = () => {
         </button>
         {
           editar == true ? (
-            <ModalCrear editar={editar} />
+            <ModalCrear editar={editar} COD_PERSONA={COD_PERSONA}/>
           ) : eliminar == false ?
           (
-            <ModalCrear editar={editar} />
+            <ModalCrear editar={editar} COD_PERSONA={COD_PERSONA}/>
           ) :
           (
-            <ModalEliminar/>
+            <ModalEliminar COD_PERSONA={COD_PERSONA}/>
           )
         }
       </dialog>
@@ -63,7 +66,7 @@ const Home = () => {
         <div className="contenedor__titulo">
           <h1 className="titulo">Listado Personas</h1>
           <button onClick={handleClickCrear} className="boton_crear">
-            Crear +<i className="bx bx-user-circle"></i>
+            Crear<i className="bx bx-user-circle"></i>
           </button>
         </div>
         <div className="contenedor__listado">
@@ -91,6 +94,7 @@ const Home = () => {
                 usuario={usuario}
                 setEditar={setEditar}
                 setEliminar={setEliminar}
+                setCOD_PERSONA={setCOD_PERSONA}
               />
             ))}
           </div>

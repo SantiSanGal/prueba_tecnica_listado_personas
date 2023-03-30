@@ -1,16 +1,18 @@
 import React from "react";
 import "./styles/usuario.css";
 
-const Usuario = ({ usuario, setEditar, setEliminar }) => {
+const Usuario = ({ usuario, setEditar, setEliminar, setCOD_PERSONA }) => {
 
   const handleClickEditar = () => {
     setEditar(true);
+    setCOD_PERSONA(usuario.COD_PERSONA);
     const modal = document.querySelector("#modal");
     modal.showModal();
   };
 
   const handleClickBorrar = () => {
     setEliminar(true);
+    setCOD_PERSONA(usuario.COD_PERSONA);
     const modal = document.querySelector("#modal");
     modal.showModal();
   }
