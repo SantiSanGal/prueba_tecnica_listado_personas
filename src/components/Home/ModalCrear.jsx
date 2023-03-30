@@ -3,11 +3,9 @@ import { useForm } from "react-hook-form";
 import $ from 'jquery'
 import "./styles/modal.css";
 
-const ModalCrear = ({ editar, COD_PERSONA }) => {
+const ModalCrear = ({ editar, COD_PERSONA, getListadoPersonas }) => {
 
   const { register, handleSubmit, reset } = useForm()
-
-  console.log(COD_PERSONA);
 
   const submit = data =>{
     if(!editar){
@@ -30,6 +28,7 @@ const ModalCrear = ({ editar, COD_PERSONA }) => {
         APELLIDO: '',
         NRO_DOCUMENTO: ''
       });
+      getListadoPersonas();
     } else {
       console.log(editar);
       $.ajax({
@@ -50,6 +49,7 @@ const ModalCrear = ({ editar, COD_PERSONA }) => {
         APELLIDO: '',
         NRO_DOCUMENTO: ''
       });
+      getListadoPersonas();
     }
   }
 

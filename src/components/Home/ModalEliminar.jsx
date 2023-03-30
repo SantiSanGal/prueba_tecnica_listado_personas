@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/modalEliminar.css";
 
-const ModalEliminar = ({ COD_PERSONA }) => {
+const ModalEliminar = ({ COD_PERSONA, getListadoPersonas, handleClickCerrar }) => {
 
   const handleClickEliminar = () => {
     $.ajax({
@@ -9,7 +9,7 @@ const ModalEliminar = ({ COD_PERSONA }) => {
       data: { _eliminarPersona_: "eliminarPersona", COD_PERSONA: COD_PERSONA },
       method: "POST",
       headers: {
-          ContentType: "application/x-www-form-urlencoded",
+          // ContentType: "application/x-www-form-urlencoded",
           Token: "NJKJNTL8SNKH5JJRTS32ZGSIIDPGHLU6KRXLQMLMJJU8MD7EY5TSWMGD2D6Z",
           ApiKey: "ISSTIXZTV53RZURJKTZD3MXVMEW7X3",
       },
@@ -17,6 +17,8 @@ const ModalEliminar = ({ COD_PERSONA }) => {
           console.log(resultados);
       }
     });
+    handleClickCerrar();
+    getListadoPersonas();
   }
 
   return (

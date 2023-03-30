@@ -12,9 +12,11 @@ const Home = () => {
   const [eliminar, setEliminar] = useState(false);
   const [COD_PERSONA, setCOD_PERSONA] = useState();
 
-
-
   useEffect(() => {
+    getListadoPersonas();
+  }, []);
+
+  const getListadoPersonas = () => {
     $.ajax({
       url: "https://telemedicina.jakemate.net:7141/api/webservice/metodo",
       data: { _nombreMetodo_: "listarPersonas" },
@@ -29,7 +31,7 @@ const Home = () => {
         console.log(resultados);
       },
     });
-  }, []);
+  }
 
   const handleClickCrear = () => {
     const modal = document.querySelector("#modal");
@@ -51,13 +53,25 @@ const Home = () => {
         </button>
         {
           editar == true ? (
-            <ModalCrear editar={editar} COD_PERSONA={COD_PERSONA}/>
+            <ModalCrear
+              editar={editar} 
+              COD_PERSONA={COD_PERSONA}
+              getListadoPersonas={getListadoPersonas}
+            />
           ) : eliminar == false ?
           (
-            <ModalCrear editar={editar} COD_PERSONA={COD_PERSONA}/>
+            <ModalCrear
+              editar={editar}
+              COD_PERSONA={COD_PERSONA}
+              getListadoPersonas={getListadoPersonas}
+            />
           ) :
           (
-            <ModalEliminar COD_PERSONA={COD_PERSONA}/>
+            <ModalEliminar
+              COD_PERSONA={COD_PERSONA}
+              getListadoPersonas={getListadoPersonas}
+              handleClickCerrar={handleClickCerrar}
+            />
           )
         }
       </dialog>
